@@ -13,11 +13,9 @@ La position des chiffres varie, respectivement toutes les secondes, minutes et h
 Nous commençons par créer la structure HTML qui servira à l'affichage:
 
 ```html
-<time class="temps" id="heure">00:00:00</time>
-
-<time class="temps" id="minute">00:00:00</time>
-
-<time class="temps" id="seconde">00:00:00</time>
+<time id="heure">00</time>
+<time id="minute">00</time>
+<time id="seconde">00</time>
 ```
 
 Nous décidons d'utiliser l'élément HTML `<time>`, créé pour afficher des informations de temps ou date.
@@ -80,7 +78,7 @@ var seconde = date.getSeconds();
 
 Le fait que "getSeconds()" se termine par une paire de parenthèses nous indique qu'il s'agit d'une **fonction**.  Une fonction, en JavaScript, c'est un ensemble d’instructions prêt à être (ré)utilisé. Dans certains cas, on peut insérer un contenu entre les parenthèses, p.ex. une variable qui sera modifée par la fonction. Ici ce n'est pas le cas, cette fonction étant très simple: elle va simplement retourner les secondes à partir d'un objet "Date". 
 
-Une fois cette ligne de code exécutée, nous disposons donc d'une variable "seconde", qui contient un chiffre entre 0 et 59, donné par l'horloge de votre ordinateur.
+Une fois cette ligne de code exécutée, nous disposons d'une variable "seconde", qui contient un chiffre entre 0 et 59, donné par l'horloge de votre ordinateur.
 
 Si nous voulons définir heure/minute/seconde, nous pouvons procéder de cette manière:
 
@@ -93,11 +91,19 @@ var heure = date.getHours();
 
 Nous avons défini nos variables, voyons maintenant comment les afficher. 
 
-C'est l'occasion de découvrir une opération très puissante du JavaScript : la modification des contenus d'une page web.
+C'est l'occasion de découvrir une opération très puissante du JavaScript : **la modification des contenus d'une page web**.
 
 Pour modifier le contenu, nous devons effectuer deux actions: 
 
 - **Sélectionner** l'objet HTML qui servira de conteneur.
 - Effectuer la **modification** du contenu.
 
+Pour sélectionner l'objet, il fait décider par quel critère nous allons l'isoler: élément HTML, "id" ou "class". Puisque notre HTML se présente comme ceci: 
 
+```html
+<time id="heure">00</time>
+<time id="minute">00</time>
+<time id="seconde">00</time>
+```
+
+Pour voir l'exemple en action, [voici le code](tutoriel-1-code).
