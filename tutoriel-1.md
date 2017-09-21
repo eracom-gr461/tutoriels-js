@@ -39,9 +39,9 @@ Une fois l'heure courante définie, nous stockerons les minutes, secondes et heu
 
 Il faut pour cela comprendre ce qu'est une **variable**. Une variable est un mot-clé auquel on assigne une valeur (chiffre, texte, ensemble de données), afin de la réutiliser facilement. On utilise ce type de procédé en mathématiques (a+b=c), ou en comptabilité (revenu brut - charges salariales = revenu net). Les charges salariales sont une variable, qui sera définie p.ex. à 7.66%.
 
-Pour "produire" la date courante, nous utilisons une méthode "prête à l'emploi" inclue dans JavaScript. C'est la méthode "Date", qui permet de produire un affichage de date et d'heure, dans divers formats.
+Pour "produire" la date courante, nous utilisons une technique "prête à l'emploi" inclue dans JavaScript. C'est **[l'objet "Date"](https://www.w3schools.com/jsref/jsref_obj_date.asp)**, qui permet de produire un affichage de date et d'heure, dans divers formats.
 
-Voici comment fonctionne cette méthode:
+Voici comment faire appel à cet objet:
 
 ```javascript
 var date = new Date;
@@ -49,14 +49,14 @@ var date = new Date;
 
 - Le premier mot, **"var"**, indique que nous allons définir une **variable**. 
 - Le deuxième mot, **"date"**, est le nom que nous avons décidé de donner à la variable. Nous aurions pu choisir n'importe quel mot, p.ex. "pizza", "chouFleur" ou "delta9". On doit se limiter à des lettres et des chiffres (pas d'espaces, accents ou signes de ponctuation). Dans le cas de mots composés ("chou-fleur"), la convention en JavaScript est d'utiliser des majuscules (comme dans "chouFleur").
-- Le signe "=" précède la définition de la variable.
-- "new Date" est la méthode JavaScript à laquelle nous faisons appel, qui produit un "objet date", contenant toutes les informations : année, mois, jour, heure, minute, seconde, milliseconde...
+- Le signe **"="** précède la définition de la variable.
+- **"new Date"** est la technique permettant de créer un "objet date", contenant toutes les informations : année, mois, jour, heure, minute, seconde, milliseconde...
 
 Cet "objet-date" est maintenant stocké dans la variable "date", mais il est invisible. Si on décide de l'afficher, on peut écrire la ligne JavaScript suivante:
 
 ```javascript
 console.log(date);
-`` 
+```
 
 Ce qui produira l'affichage suivant dans la console JavaScript de notre navigateur: 
 
@@ -76,9 +76,9 @@ var seconde = date.getSeconds();
 
 - On connait déjà le **"var"**, c'est le mot annonçant qu'on définit une variable.
 - **"seconde"** est le nom que nous décidons de donner à notre variable. On serait aussi libre d'écrire "Sec", "zknd", ou "s"... L'idéal est d'utiliser des noms de variables facilement compréhensibles, pas trop longs.
-- Après le "=", on utilise la variable "date", à la suite de laquelle on colle la fonction "getSeconds()". Le fait de les séparer avec un point est important: ce caractère créé un enchaînement, la partie de gauche étant l'origine, sur laquelle agit la partie de droite.
+- Après le **"="**, on utilise la variable **"date"**, à la suite de laquelle on colle la méthode **"getSeconds()"**. Le fait de les séparer avec un point est important: ce caractère créé un enchaînement, la partie de gauche étant l'origine, sur laquelle agit la partie de droite.
 
-Le fait que "getSeconds()" se termine par une paire de parenthèses nous indique qu'il s'agit d'une "fonction".  Une fonction, en JavaScript, c'est un ensemble d’instructions prêt à être utilisé. Dans certains cas, on peut insérer un contenu entre les parenthèses, p.ex. une variable qui sera modifée par la fonction. Ici ce n'est pas le cas, cette fonction étant très simple: elle va simplement retourner les secondes à partir d'un objet "Date". 
+Le fait que "getSeconds()" se termine par une paire de parenthèses nous indique qu'il s'agit d'une **fonction**.  Une fonction, en JavaScript, c'est un ensemble d’instructions prêt à être (ré)utilisé. Dans certains cas, on peut insérer un contenu entre les parenthèses, p.ex. une variable qui sera modifée par la fonction. Ici ce n'est pas le cas, cette fonction étant très simple: elle va simplement retourner les secondes à partir d'un objet "Date". 
 
 Une fois cette ligne de code exécutée, nous disposons donc d'une variable "seconde", qui contient un chiffre entre 0 et 59, donné par l'horloge de votre ordinateur.
 
