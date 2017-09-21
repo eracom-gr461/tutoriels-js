@@ -1,0 +1,110 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>The JS Clocks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/style.css">
+        <style>
+        	
+        	body {
+        	  margin: 0;
+        	}
+        	
+        	html {
+        		font-family: Colaborate, monospace;
+        		font-size: 500%;
+        	}
+        	
+        	time {
+        		position: absolute;
+        	}
+      	
+      </style>
+    </head>
+    <body>
+
+		<time id="heure">00:00:00</time>
+
+		<time id="minute">00:00:00</time>
+
+		<time id="seconde">00:00:00</time>
+
+    </body>
+	<script>
+
+	metronomeSeconde();
+	metronomeMinute();
+	metronomeHeure();
+
+
+	// répéter la fonction metronone une fois par seconde
+	var myVar = setInterval(function() {
+	  metronomeSeconde();
+  }, 1000); // mille millisecondes = 1 seconde
+
+
+	// notre fonction random:
+
+	function getRandom(min, max) {
+    	return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function metronomeHeure() {
+
+		var date = new Date;
+  	var heure = date.getHours();
+
+		document.getElementById("heure").innerHTML = heure;
+
+		document.getElementById("heure").style.top = getRandom(10, 90)+'%';
+  	document.getElementById("heure").style.left = getRandom(10, 90)+'%';
+
+	}
+
+	function metronomeMinute() {
+
+		var date = new Date;
+				
+  	var minute = date.getMinutes();
+
+	  document.getElementById("minute").innerHTML = minute;
+
+		document.getElementById("minute").style.top = getRandom(10, 90)+'%';
+  	document.getElementById("minute").style.left = getRandom(10, 90)+'%';
+
+	}
+	
+
+	function metronomeSeconde() {
+
+	  // 1: on définit l'heure, avec l'objet Date()
+	  // voir documentation: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date
+
+	  var date = new Date;
+		var minute = date.getMinutes();
+		var seconde = date.getSeconds();
+
+	  document.getElementById("seconde").innerHTML = seconde;
+
+		document.getElementById("seconde").style.top = getRandom(10, 90)+'%';
+  	document.getElementById("seconde").style.left = getRandom(10, 90)+'%';
+
+	  // test conditionnel
+
+	  if ( seconde == 0 ) {
+
+		  metronomeMinute();
+
+		  if ( minute == 0 ) {
+
+				metronomeHeure();
+
+		  }
+	  }
+
+	}
+
+	</script>
+</html>
