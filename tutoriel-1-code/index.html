@@ -1,11 +1,9 @@
 <!doctype html>
-<html class="no-js" lang="fr">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>The JS Clocks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/style.css">
         <style>
         	
         	body {
@@ -13,7 +11,7 @@
         	}
         	
         	html {
-        		font-family: Colaborate, monospace;
+        		font-family: monospace;
         		font-size: 500%;
         	}
         	
@@ -31,20 +29,20 @@
 
     </body>
 	<script>
-
+	
+	// Initialiser l'affichage au chargement:
 	metronomeSeconde();
 	metronomeMinute();
 	metronomeHeure();
 
 
-	// répéter la fonction metronone une fois par seconde
+	// Répéter la fonction metronome une fois par seconde
 	var myVar = setInterval(function() {
 	  metronomeSeconde();
   }, 1000); // mille millisecondes = 1 seconde
 
 
-	// notre fonction random:
-
+	// Notre fonction random:
 	function getRandom(min, max) {
     	return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
@@ -64,7 +62,6 @@
 	function metronomeMinute() {
 
 		var date = new Date;
-				
   	var minute = date.getMinutes();
 
 	  document.getElementById("minute").innerHTML = minute;
@@ -74,11 +71,7 @@
 
 	}
 	
-
 	function metronomeSeconde() {
-
-	  // 1: on définit l'heure, avec l'objet Date()
-	  // voir documentation: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Date
 
 	  var date = new Date;
 		var minute = date.getMinutes();
@@ -92,13 +85,10 @@
 	  // test conditionnel
 
 	  if ( seconde == 0 ) {
-
 		  metronomeMinute();
 
 		  if ( minute == 0 ) {
-
 				metronomeHeure();
-
 		  }
 	  }
 

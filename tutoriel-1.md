@@ -106,4 +106,8 @@ Pour sélectionner l'objet, il fait décider par quel critère nous allons l'iso
 <time id="seconde">00</time>
 ```
 
-Pour voir l'exemple en action, [voici le code](tutoriel-1-code).
+---
+
+## Démonstration
+
+Pour voir le code de ce tutoriel exemple en action, [visitez cette page](tutoriel-1-code) et affichez le code source.
