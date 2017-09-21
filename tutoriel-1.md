@@ -7,8 +7,11 @@ Choses à connaître:
 - Sélectionner un élément avec "getElementById"
 - Modifier un élément avec "style"
 
-Dans ce tutoriel (basé sur le projet de Julien Nshimirimana), nous allons afficher l'heure, les minutes et les secondes sous forme de chiffres.
+Dans ce tutoriel (basé [sur le projet de Julien Nshimirimana](https://github.com/eracom-gr461/jsclocks-juliusboy)), nous allons afficher l'heure, les minutes et les secondes sous forme de chiffres.
+
 La position des chiffres varie, respectivement toutes les secondes, minutes et heures.
+
+## Structure HTML
 
 Nous commençons par créer la structure HTML qui servira à l'affichage:
 
@@ -36,6 +39,8 @@ Pour afficher l'heure, nous allons devoir "produire" l'heure courante, puis la "
 Une fois l'heure courante définie, nous stockerons les minutes, secondes et heures dans des "variables", qui seront régulièrement renouvelées.
 
 Il faut pour cela comprendre ce qu'est une **variable**. Une variable est un mot-clé auquel on assigne une valeur (chiffre, texte, ensemble de données), afin de la réutiliser facilement. On utilise ce type de procédé en mathématiques (a+b=c), ou en comptabilité (revenu brut - charges salariales = revenu net). Les charges salariales sont une variable, qui sera définie p.ex. à 7.66%.
+
+### La fabrication du temps
 
 Pour "produire" la date courante, nous utilisons une technique "prête à l'emploi" inclue dans JavaScript. C'est **[l'objet "Date"](https://www.w3schools.com/jsref/jsref_obj_date.asp)**, qui permet de produire un affichage de date et d'heure, dans divers formats.
 
@@ -72,7 +77,7 @@ Voici par exemple comment obtenir les secondes, à partir de notre variable "dat
 var seconde = date.getSeconds();
 ``` 
 
-- On connait déjà le **"var"**, c'est le mot annonçant qu'on définit une variable.
+- On connait déjà le **"var"**, c'est l'instruction annonçant qu'on définit une **variable**.
 - **"seconde"** est le nom que nous décidons de donner à notre variable. On serait aussi libre d'écrire "Sec", "zknd", ou "s"... L'idéal est d'utiliser des noms de variables facilement compréhensibles, pas trop longs.
 - Après le **"="**, on utilise la variable **"date"**, à la suite de laquelle on colle la méthode **"getSeconds()"**. Le fait de les séparer avec un point est important: ce caractère créé un enchaînement, la partie de gauche étant l'origine, sur laquelle agit la partie de droite.
 
@@ -98,7 +103,7 @@ Pour modifier le contenu, nous devons effectuer deux actions:
 - **Sélectionner** l'objet HTML qui servira de conteneur.
 - Effectuer la **modification** du contenu.
 
-Pour sélectionner l'objet, il fait décider par quel critère nous allons l'isoler: élément HTML, "id" ou "class". Puisque notre HTML se présente comme ceci: 
+Pour sélectionner l'objet, il fait décider par quel critère nous allons l'isoler: élément HTML, "id" ou "class". Souvenons-nous que notre HTML se présente comme ceci: 
 
 ```html
 <time id="heure">00</time>
@@ -106,8 +111,34 @@ Pour sélectionner l'objet, il fait décider par quel critère nous allons l'iso
 <time id="seconde">00</time>
 ```
 
+Il paraît logique d'utiliser le paramètre "id" pour sélectionner l'élément-cible. Ça tombe bien, JavaScript propose la méthode [getElementByID](https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById), qui sert précisément à cela.
+
+Voici un exemple d'utilisation: 
+
+```javascript
+document.getElementById('seconde');
+```
+
+Dans cet exemple, nous sélectionnons un élément HTML possédant l'identifiant 'seconde'. Cela correspond dans notre cas à l'élément `<time id="seconde">00</time>`.
+
+Comment modifier le contenu de cet élément? Là aussi, une méthode JavaScript existe: `[innerHTML](https://developer.mozilla.org/fr/docs/Web/API/Element/innertHTML)`.
+
+Voici comment remplacer le contenu de notre élément `<time>`:
+
+```javascript
+document.getElementById("seconde").innerHTML = "texte qui va remplacer le contenu";
+```
+
+Puisque nous souhaitons mettre à la place du contenu le numéro stocké dans la variable "seconde", voici un meilleur exemple:
+
+```javascript
+document.getElementById("seconde").innerHTML = seconde;
+```
+
+**Important:** Dans cette ligne de code, le mot `seconde` après le signe "=" s'écrit **sans guillemets**, car c'est une **variable**. Si nous avions laissé des guillemets, ce serait le mot "seconde" en toutes lettres qui s'afficherait. En JavaScript, ce qui est entouré de guillemets est du texte, pas du code. En l'absence de guillemets, les mots doivent correspondre à des méthodes JavaScript, ou des variables définies – sans quoi, nous aurons des erreurs.
+
 ---
 
 ## Démonstration
 
-Pour voir le code de ce tutoriel exemple en action, [visitez cette page](tutoriel-1-code) et affichez le code source.
+Pour voir le code de ce tutoriel exemple en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
