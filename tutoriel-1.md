@@ -50,6 +50,7 @@ Voici comment faire appel à cet objet:
 var date = new Date;
 ```
 
+Explication:
 - Le premier mot, **"var"**, indique que nous allons définir une **variable**. 
 - Le deuxième mot, **"date"**, est le nom que nous avons décidé de donner à la variable. Nous aurions pu choisir n'importe quel mot, p.ex. "pizza", "chouFleur" ou "delta9". On doit se limiter à des lettres et des chiffres (pas d'espaces, accents ou signes de ponctuation). Dans le cas de mots composés ("chou-fleur"), la convention en JavaScript est d'utiliser des majuscules (comme dans "chouFleur").
 - Le signe **"="** précède la définition de la variable.
@@ -69,6 +70,8 @@ Thu Sep 21 2017 20:51:51 GMT+0200 (CEST)
 
 Il s'agit de la date / heure telle qu'elle est réglée sur votre ordinateur (si elle est fausse, c'est que l'horloge de votre appareil est déréglée).
 
+### Définissons nos variables
+
 Ces informations sont trop détaillées, pour nos besoins. Nous allons donc extraire les **heures**, **minutes** et **secondes**. Là aussi, le JavaScript propose des fonctions prêtes à l'emploi: `getHours()`, `getMinutes()` et `getSeconds()`.
 
 Voici par exemple comment obtenir les secondes, à partir de notre variable "date":
@@ -77,6 +80,7 @@ Voici par exemple comment obtenir les secondes, à partir de notre variable "dat
 var seconde = date.getSeconds();
 ``` 
 
+Explication:
 - On connait déjà le **"var"**, c'est l'instruction annonçant qu'on définit une **variable**.
 - **"seconde"** est le nom que nous décidons de donner à notre variable. On serait aussi libre d'écrire "Sec", "zknd", ou "s"... L'idéal est d'utiliser des noms de variables facilement compréhensibles, pas trop longs.
 - Après le **"="**, on utilise la variable **"date"**, à la suite de laquelle on colle la méthode **"getSeconds()"**. Le fait de les séparer avec un point est important: ce caractère créé un enchaînement, la partie de gauche étant l'origine, sur laquelle agit la partie de droite.
@@ -93,6 +97,8 @@ var minute = date.getMinutes();
 var seconde = date.getSeconds();
 var heure = date.getHours();
 ```
+
+### Modification des contenus
 
 Nous avons défini nos variables, voyons maintenant comment les afficher. 
 
@@ -111,7 +117,7 @@ Pour sélectionner l'objet, il fait décider par quel critère nous allons l'iso
 <time id="seconde">00</time>
 ```
 
-Il paraît logique d'utiliser le paramètre "id" pour sélectionner l'élément-cible. Ça tombe bien, JavaScript propose la méthode [getElementByID](https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById), qui sert précisément à cela.
+Il paraît logique d'utiliser le paramètre "id" pour sélectionner l'élément-cible. Ça tombe bien, JavaScript propose la méthode [getElementByID](https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById), qui sert précisément à cela!
 
 Voici un exemple d'utilisation: 
 
@@ -123,19 +129,36 @@ Dans cet exemple, nous sélectionnons un élément HTML possédant l'identifiant
 
 Comment modifier le contenu de cet élément? Là aussi, une méthode JavaScript existe: `[innerHTML](https://developer.mozilla.org/fr/docs/Web/API/Element/innertHTML)`.
 
-Voici comment remplacer le contenu de notre élément `<time>`:
+Voici comment remplacer le contenu de notre élément `<time>` avec `innerHTML`:
 
 ```javascript
 document.getElementById("seconde").innerHTML = "texte qui va remplacer le contenu";
 ```
 
-Puisque nous souhaitons mettre à la place du contenu le numéro stocké dans la variable "seconde", voici un meilleur exemple:
+Puisque nous souhaitons mettre à la place du contenu le numéro enregistré dans la variable "seconde", voici un meilleur exemple:
 
 ```javascript
 document.getElementById("seconde").innerHTML = seconde;
 ```
 
 **Important:** Dans cette ligne de code, le mot `seconde` après le signe "=" s'écrit **sans guillemets**, car c'est une **variable**. Si nous avions laissé des guillemets, ce serait le mot "seconde" en toutes lettres qui s'afficherait. En JavaScript, ce qui est entouré de guillemets est du texte, pas du code. En l'absence de guillemets, les mots doivent correspondre à des méthodes JavaScript, ou des variables définies – sans quoi, nous aurons des erreurs.
+
+### Une action répétitive
+
+Nous savons maintenant comment afficher un chiffre dans un élément de notre page ... mais comment effectuer cette action à répétition, une fois par seconde?
+
+Nous utiliserons la méthode JavaScript prévue pour ce besoin, `setInterval()`. Voici comment cette méthode fonctionne:
+
+```javascript
+var monIntervalle = setInterval(function() {
+	  metronome();
+  }, 1000); 
+```
+
+Explications:
+- "var monIntervalle" définit une variable, monIntervalle étant le nom donné à notre intervalle. Cela n'a pas de conséquence, mais il est nécessaire de lui donner un nom pour le faire exister.
+-  "setInterval" est la méthode que nous utilisons, suivie de "function()", qui nous permet de déclencher une fonction qui se répétera à intervalles réguliers. Nous devons donner un nom à cette fonction, nous avons choisi "metronome()". Il ne faudra pas oublier de la définir.
+- "1000" est la durée de l'intervalle, définie en millisecondes. Avec la valeur de 1000, cela donne une seconde. 
 
 ---
 

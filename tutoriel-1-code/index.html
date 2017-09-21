@@ -31,14 +31,14 @@
 	<script>
 	
 	// Initialiser l'affichage au chargement:
-	metronomeSeconde();
+	metronome();
 	metronomeMinute();
 	metronomeHeure();
 
 
 	// Répéter la fonction metronome une fois par seconde
 	var myVar = setInterval(function() {
-	  metronomeSeconde();
+	  metronome();
   }, 1000); // mille millisecondes = 1 seconde
 
 
@@ -71,7 +71,7 @@
 
 	}
 	
-	function metronomeSeconde() {
+	function metronome() {
 
 	  var date = new Date;
 		var minute = date.getMinutes();
