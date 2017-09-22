@@ -1,0 +1,153 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>The JS Clocks</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.css">
+        <style>
+
+	        body {
+					  display: flex;
+					  height: 100%;
+					  width: 100%;
+					  position: absolute;
+					}
+		
+		      svg {
+		        border: 1px solid #ddd;
+		        margin: auto;
+		        height: 100%;
+		        width: auto;
+		      }
+		
+		        /*
+		        * Rules for Vertical Screens
+		        */
+		        @media screen and ( max-aspect-ratio: 1/1 ) {
+		          svg {
+		            width: 100%;
+		            height: auto;
+		          }
+		        }
+		
+		      .scnd {
+		        display: none;
+		      }
+
+        </style>
+    </head>
+    <body>
+
+		<svg id="vector" width="600" height="600" viewbox="0 0 600 600">
+
+    		<circle id="seconde" class="scnd" style="fill:#000000;stroke:#000000;stroke-width:0;stroke-miterlimit:10;" cx="100" cy="100" r="3"/>
+
+    		<circle id="minutes" style="fill:#FFFFFF;stroke:#000000;stroke-width:1.5;stroke-miterlimit:10;" cx="300" cy="112" r="20"/>
+
+    		<g id="heures">
+    			<circle style="fill:#FFFFFF;stroke:#000000;stroke-width:2;stroke-miterlimit:10;" cx="300" cy="50" r="40"/>
+
+      			<line style="fill:none;stroke:#000000;stroke-width:1.5;stroke-miterlimit:10;" x1="55.454" y1="300" x2="13.158" y2="300"/>
+
+      			<line style="fill:none;stroke:#000000;stroke-width:1.5;stroke-miterlimit:10;" x1="533.466" y1="300" x2="575.762" y2="300"/>
+    		</g>
+		</svg>
+		
+		<script>
+			
+			// Cloner un élément 60 fois:
+			// On va créer 60 items, et on va les masquer
+			
+			// On sélectionner notre modèle:
+			var itm = document.getElementById("seconde");
+			
+			var i; // i = convention, pour "integer" (nombre entier)
+			for (i = 0; i < 61; i++) {
+					
+				var angle = i*6;
+				
+				var angle = angle - 135; // Correction du "translate(50%,50%)"
+			
+				// Copy the element
+				var cln = itm.cloneNode(true);
+				
+				// Change the elment
+				cln.id = 'seconde'+i;
+				cln.style.transform = 'translate(50%,50%) rotate('+angle+'deg)';
+				
+				// Append the cloned element to something
+				document.getElementById("vector").appendChild(cln);
+			
+			}
+			
+			// Colorisation de quelques éléments pour visualiser leur position: 
+			
+			var sec0 = document.getElementById("seconde0");
+			sec0.style.fill = "red";
+			
+			var sec15 = document.getElementById("seconde15");
+			sec15.style.fill = "red";
+			
+			var sec45 = document.getElementById("seconde45");
+			sec45.style.fill = "red";
+			
+			var sec30 = document.getElementById("seconde30");
+			sec30.style.fill = "red";
+		
+			
+			
+			function metronome() {
+			
+			  var date = new Date();
+			  
+			  var seconde = date.getSeconds();
+			  
+			  if ( seconde == 0 ) {
+			  
+			  	// masquer tous les .scnd
+			  	
+			  	var hideAll = document.getElementsByClassName("scnd") ;
+			  	
+			  	var i;
+			  	for (i = 0; i < hideAll.length; i++) {
+			  		hideAll[i].style.display = "none";
+			  	}
+			  	
+			  	// afficher l'élément zéro:
+			  	
+			  	var showSec = document.getElementById("seconde0");
+			  	showSec.style.display = "block";
+			  	
+			  
+			  } else {
+			  
+			  	// afficher l'élément
+			  
+			  	var sec = 'seconde' + date.getSeconds();
+		
+				  // console.log(sec);
+				  
+				  var showSec = document.getElementById(sec);
+				  
+				  showSec.style.display = "block";
+			  
+			  }
+		
+			} // fin de metronome()
+			
+			
+			// On lance metronome() une fois dès le chargement de la page:
+			
+			metronome();
+			
+			
+			// Répéter la fonction metronone une fois par seconde
+			
+			var forever = setInterval(function() {
+			  metronome();
+			}, 1000);
+		
+		</script>
+  </body>
+</html>
