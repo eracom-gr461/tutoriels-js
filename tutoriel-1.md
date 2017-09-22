@@ -180,18 +180,17 @@ function metronome() {
 On observe ici la méthode pour **définir une fonction**:
 
 - La déclaration débute obligatoirement par **"function"** (similaire à la déclaration "var" que nous connaissons déjà). 
-- Elle est suivie par **le nom** que nous donnons à la fonction: metronome(). Nous aurions pu choisir librement: MetrOnOme(), MouvementPerpetuel(), AiguilleDesSecondes()... C'est un choix personnel!
-- Le nom de la fonction comporte une paire de parenthèses "()". Si on a besoin de transmettre des données à la fonction, on peut inclure ici un ou plusieurs paramètres. Visuellement, ces parenthèses nous permettent de voir facilement quand on a affaire à une fonction.
-- Une fois le nom défini, on ouvre les crochets "moustaches": { ... }. Tout ce qui se trouve entre ces crochets définit le fonctionnement. Ce code sera exécuté dès qu'on fait appel à la fonction.
+- Elle est suivie par **le nom** que nous donnons à la fonction: **metronome()**. Nous aurions pu choisir librement: MetrOnOme(), MouvementPerpetuel(), AiguilleDesSecondes()... C'est un choix personnel!
+- Le nom de la fonction comporte une paire de **parenthèses "()"**. Si on a besoin de transmettre des données à la fonction, on peut inclure ici un ou plusieurs paramètres. Visuellement, ces parenthèses nous permettent de voir facilement qu'on a affaire à une fonction.
+- Une fois le nom défini, on ouvre **les crochets** en forme "moustaches": { ... } (sur votre clavier, taper ALT et 8/9 pour les obtenir). Tout ce qui se trouve entre ces crochets constitue la fonction. Ce code sera exécuté dès qu'on fait appel à cette fonction.
 
-Maintenant que la fonction est définie, on peut faire appel à la fonction aussi souvent qu'on le souhaite, simplement en écrivant son nom:
+Maintenant que la fonction **metronome()** est définie, on peut faire appel à elle aussi souvent qu'on le souhaite, simplement en écrivant son nom:
 
 ```javascript
 metronome();
-}
 ```
 
-À noter: quand on veut faire appel à une fonction existante, on ne répète pas la déclaration "function". On l'utilise uniquement lors de la déclaration initiale. 
+**À noter:** quand on veut faire appel à une fonction existante, on ne répète pas la déclaration "function". On l'utilise uniquement lors de la déclaration initiale. 
 
 ### Une fonction, plusieurs fonctions...
 
@@ -201,7 +200,7 @@ Nous pourrions également les redéfinir à chaque seconde... mais le comporteme
 
 Nous pourrions créer des "setInterval" supplémentaires, et ralentir leur rythme en leur donnant un cycle de 60'000 (une minute) ou 3'600'000 (une heure en millisecondes).
 
-Mais le problème est que ces cycles ne se déclencheront pas à l'heure pleine. En effet, ils sont "initialisés" **à l'instant du chargement de la page**. Le passage d'une minute à l'autre, et d'une heure à l'autre, se ferait donc à un moment aléatoire – c'est inacceptable pour une horloge! 
+Le problème: ces cycles ne se déclencheront pas à l'heure pleine. En effet, ils sont "initialisés" **à l'instant du chargement de la page**. Le passage d'une minute à l'autre, et d'une heure à l'autre, se ferait donc à un moment aléatoire – c'est inacceptable pour une horloge! 
 
 Il y a une meilleure possibilité: utiliser notre fonction metronome() qui s'exécute au rythme des secondes, et effectuer un **test conditionnel** pour détecter la "seconde zéro" - l'instant où la valeur des secondes est égale à zéro.
 
@@ -217,7 +216,7 @@ if ( seconde == 0 ) {
 }
 ```
 
-On notera qu'on n'utilise pas un simple "=", car ce signe est utilisé pour définir une variable (on définirait la seconde à zéro, au lieu tester sa valeur). L'opérateur de comparaison "est-ce que c'est égal à" s'écrit "==". Parmi les autres opérateurs, nous avons ">" (plus grand que), "<" (plus petit que), "!=" (pas égal à).
+On notera qu'on n'utilise pas un simple "=", car ce signe est utilisé pour **définir** une variable (on définirait la seconde à zéro, au lieu tester sa valeur). L'opérateur de comparaison "est-ce que c'est égal à" s'écrit `==`. Parmi les autres opérateurs, nous avons `>` (plus grand que), `<` (plus petit que), `!=` (pas égal à).
 
 Il est possible également de créer une structure "si ceci ... sinon cela ...", ce qui permet de concevoir des comportements alternatifs: 
 
@@ -229,7 +228,7 @@ if ( seconde == 0 ) {
 }
 ```
 
-Nous pouvons donc définir une fonction pour les minutes – appelons-la `metronomeMinute()` - et la déclencher au moment où la seconde est égale à zéro:
+Nous pouvons donc définir une fonction pour afficher les minutes – appelons-la `metronomeMinute()` – et la déclencher au moment où la seconde est égale à zéro:
 
 ```javascript
 if ( seconde == 0 ) {
@@ -237,20 +236,28 @@ if ( seconde == 0 ) {
 }
 ```
 
-Voici à quoi ressemblent maintenant nos fonctions:
+Voici à quoi ressemble maintenant notre fonction metronome:
 
 ```javascript
 function metronome() {
-
   var date = new Date;
   var minute = date.getMinutes();
   var seconde = date.getSeconds();
   document.getElementById("seconde").innerHTML = seconde;
-
   // test conditionnel
   if ( seconde == 0 ) {
 	  metronomeMinute();
   }
+}
+```
+
+Et la fonction metronomeMinute:
+
+```javascript
+function metronomeMinute() {
+  var date = new Date;
+  var minute = date.getMinutes();
+  document.getElementById("minute").innerHTML = minute;
 }
 ```
 
