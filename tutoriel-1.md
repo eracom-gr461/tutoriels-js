@@ -2,14 +2,19 @@
 
 Choses à connaître:
 - Insérer du code JavaScript dans une page
+
+Voici ce que vous apprendrez dans ce tutoriel:
 - Définir une variable
 - Définir une fonction
 - Sélectionner un élément avec "getElementById"
-- Modifier un élément avec "style"
+- Modifier l'aspect d'un élément avec "style"
+- Modifier les contenus avec "innerHTML"
+- Produire une action répétitive avec "setInterval"
+- Produire de l'aléatoire avec "Math.random()"
 
 Dans ce tutoriel (basé [sur le projet de Julien Nshimirimana](https://github.com/eracom-gr461/jsclocks-juliusboy)), nous allons afficher l'heure, les minutes et les secondes sous forme de chiffres.
 
-La position des chiffres varie, respectivement toutes les secondes, minutes et heures.
+La position des chiffres va varier, respectivement toutes les secondes, minutes et heures.
 
 ## Structure HTML
 
@@ -127,12 +132,12 @@ document.getElementById('seconde');
 
 Dans cet exemple, nous sélectionnons un élément HTML possédant l'identifiant 'seconde'. Cela correspond dans notre cas à l'élément `<time id="seconde">00</time>`.
 
-Comment modifier le contenu de cet élément? Là aussi, une méthode JavaScript existe: `[innerHTML](https://developer.mozilla.org/fr/docs/Web/API/Element/innertHTML)`.
+Comment modifier le contenu de cet élément? Là aussi, une méthode JavaScript existe: [`innerHTML`](https://developer.mozilla.org/fr/docs/Web/API/Element/innertHTML).
 
 Voici comment remplacer le contenu de notre élément `<time>` avec `innerHTML`:
 
 ```javascript
-document.getElementById("seconde").innerHTML = "texte qui va remplacer le contenu";
+document.getElementById("seconde").innerHTML = "blabla";
 ```
 
 Puisque nous souhaitons mettre à la place du contenu le numéro enregistré dans la variable "seconde", voici un meilleur exemple:
@@ -141,24 +146,115 @@ Puisque nous souhaitons mettre à la place du contenu le numéro enregistré dan
 document.getElementById("seconde").innerHTML = seconde;
 ```
 
-**Important:** Dans cette ligne de code, le mot `seconde` après le signe "=" s'écrit **sans guillemets**, car c'est une **variable**. Si nous avions laissé des guillemets, ce serait le mot "seconde" en toutes lettres qui s'afficherait. En JavaScript, ce qui est entouré de guillemets est du texte, pas du code. En l'absence de guillemets, les mots doivent correspondre à des méthodes JavaScript, ou des variables définies – sans quoi, nous aurons des erreurs.
+Détail important: dans cette ligne de code, le mot `seconde` après le signe "=" s'écrit **sans guillemets**, car c'est une **variable**. Si nous avions laissé des guillemets, c'est le mot "seconde" en toutes lettres qui s'afficherait. En JavaScript, ce qui est entouré de guillemets est **du texte**, pas du code. En l'absence de guillemets, les mots doivent correspondre à des méthodes JavaScript, ou des variables définies – sans quoi, nous aurons des erreurs.
 
 ### Une action répétitive
 
-Nous savons maintenant comment afficher un chiffre dans un élément de notre page ... mais comment effectuer cette action à répétition, une fois par seconde?
+Nous savons maintenant comment afficher un chiffre dans un élément de notre page ... mais comment effectuer cette action **à répétition**, une fois par seconde?
 
 Nous utiliserons la méthode JavaScript prévue pour ce besoin, `setInterval()`. Voici comment cette méthode fonctionne:
 
 ```javascript
 var monIntervalle = setInterval(function() {
-	  metronome();
-  }, 1000); 
+  metronome();
+}, 1000); 
 ```
 
 Explications:
-- "var monIntervalle" définit une variable, monIntervalle étant le nom donné à notre intervalle. Cela n'a pas de conséquence, mais il est nécessaire de lui donner un nom pour le faire exister.
+- "var monIntervalle" définit une variable, `monIntervalle` étant le nom donné à notre intervalle. Cela n'a pas de conséquence, mais il est nécessaire de lui donner un nom pour le faire exister.
 -  "setInterval" est la méthode que nous utilisons, suivie de "function()", qui nous permet de déclencher une fonction qui se répétera à intervalles réguliers. Nous devons donner un nom à cette fonction, nous avons choisi "metronome()". Il ne faudra pas oublier de la définir.
 - "1000" est la durée de l'intervalle, définie en millisecondes. Avec la valeur de 1000, cela donne une seconde. 
+
+Nous avons désormais **une fonction** qui se répète de manière cyclique, à l'infini.
+
+Nous pouvons maintenant produire une horloge affichant les secondes. Voilà ce que nous écrivons dans notre fonction métronome:
+
+```javascript
+function metronome() {
+  var date = new Date;
+  var seconde = date.getSeconds();
+  document.getElementById("seconde").innerHTML = seconde;
+}
+```
+
+On observe ici la méthode pour **définir une fonction**:
+
+- La déclaration débute obligatoirement par **"function"** (similaire à la déclaration "var" que nous connaissons déjà). 
+- Elle est suivie par **le nom** que nous donnons à la fonction: metronome(). Nous aurions pu choisir librement: MetrOnOme(), MouvementPerpetuel(), AiguilleDesSecondes()... C'est un choix personnel!
+- Le nom de la fonction comporte une paire de parenthèses "()". Si on a besoin de transmettre des données à la fonction, on peut inclure ici un ou plusieurs paramètres. Visuellement, ces parenthèses nous permettent de voir facilement quand on a affaire à une fonction.
+- Une fois le nom défini, on ouvre les crochets "moustaches": { ... }. Tout ce qui se trouve entre ces crochets définit le fonctionnement. Ce code sera exécuté dès qu'on fait appel à la fonction.
+
+Maintenant que la fonction est définie, on peut faire appel à la fonction aussi souvent qu'on le souhaite, simplement en écrivant son nom:
+
+```javascript
+metronome();
+}
+```
+
+À noter: quand on veut faire appel à une fonction existante, on ne répète pas la déclaration "function". On l'utilise uniquement lors de la déclaration initiale. 
+
+### Une fonction, plusieurs fonctions...
+
+Grâce à la méthode "setInterval" définie plus haut, notre fonction "metronome()" sera exécutée **une fois par seconde**: notre horloge indique donc les secondes, c'est super! Restent les heures et minutes.
+
+Nous pourrions également les redéfinir à chaque seconde... mais le comportement que nous souhaitons, une fois les positions aléatoire en place (deuxième étape du tutoriel), est que leur positionnement change **sur un rythme plus lent**: une fois par minute pour les minutes, à l'heure pleine pour les heures.
+
+Nous pourrions créer des "setInterval" supplémentaires, et ralentir leur rythme en leur donnant un cycle de 60'000 (une minute) ou 3'600'000 (une heure en millisecondes).
+
+Mais le problème est que ces cycles ne se déclencheront pas à l'heure pleine. En effet, ils sont "initialisés" **à l'instant du chargement de la page**. Le passage d'une minute à l'autre, et d'une heure à l'autre, se ferait donc à un moment aléatoire – c'est inacceptable pour une horloge! 
+
+Il y a une meilleure possibilité: utiliser notre fonction metronome() qui s'exécute au rythme des secondes, et effectuer un **test conditionnel** pour détecter la "seconde zéro" - l'instant où la valeur des secondes est égale à zéro.
+
+### Un opérateur conditionnel
+
+C'est l'occasion de découvrir comment **créer une condition** JavaScript. C'est une structure logique fonctionnant avec des comparateurs mathématiques: "égal à", "plus grand que", "plus petit que".
+
+Voici comment tester si la valeur de notre variable "seconde" est égale à zéro:
+
+```javascript
+if ( seconde == 0 ) { 
+  // ceci sera traité si la condition est vraie
+}
+```
+
+On notera qu'on n'utilise pas un simple "=", car ce signe est utilisé pour définir une variable (on définirait la seconde à zéro, au lieu tester sa valeur). L'opérateur de comparaison "est-ce que c'est égal à" s'écrit "==". Parmi les autres opérateurs, nous avons ">" (plus grand que), "<" (plus petit que), "!=" (pas égal à).
+
+Il est possible également de créer une structure "si ceci ... sinon cela ...", ce qui permet de concevoir des comportements alternatifs: 
+
+```javascript
+if ( seconde == 0 ) { 
+  console.log("seconde zéro");
+} else {
+  console.log("seconde pas zéro");
+}
+```
+
+Nous pouvons donc définir une fonction pour les minutes – appelons-la `metronomeMinute()` - et la déclencher au moment où la seconde est égale à zéro:
+
+```javascript
+if ( seconde == 0 ) {
+  metronomeMinute();
+}
+```
+
+Voici à quoi ressemblent maintenant nos fonctions:
+
+```javascript
+function metronome() {
+
+  var date = new Date;
+  var minute = date.getMinutes();
+  var seconde = date.getSeconds();
+  document.getElementById("seconde").innerHTML = seconde;
+
+  // test conditionnel
+  if ( seconde == 0 ) {
+	  metronomeMinute();
+  }
+}
+```
+
+## Deuxième étape: position aléatoire
 
 ---
 

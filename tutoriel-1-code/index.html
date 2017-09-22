@@ -37,7 +37,7 @@
 
 
 	// Répéter la fonction metronome une fois par seconde
-	var myVar = setInterval(function() {
+	var monIntervalle = setInterval(function() {
 	  metronome();
   }, 1000); // mille millisecondes = 1 seconde
 
@@ -68,6 +68,11 @@
 
 		document.getElementById("minute").style.top = getRandom(10, 90)+'%';
   	document.getElementById("minute").style.left = getRandom(10, 90)+'%';
+  	
+  	// test conditionnel
+  	if ( minute == 0 ) {
+  		metronomeHeure();
+  	}
 
 	}
 	
@@ -83,13 +88,10 @@
   	document.getElementById("seconde").style.left = getRandom(10, 90)+'%';
 
 	  // test conditionnel
-
 	  if ( seconde == 0 ) {
 		  metronomeMinute();
-		  if ( minute == 0 ) {
-				metronomeHeure();
-		  }
 	  }
+	  
 	}
 
 	</script>
