@@ -261,10 +261,14 @@ function metronomeMinute() {
 }
 ```
 
-## Deuxième étape: position aléatoire
+## Deuxième étape: position aléatoire
+
+Comment produire une position aléatoire? La page HTML étant un espace à deux dimensions, les objets sont positionnés sur les axes horizontal et vertical. Nous pouvons utiliser différentes unités (voir [le cours CSS](https://cours-web.ch/css/bases/#unités-css)), dont notamment les pourcentages. Si nous donnons aux éléments une position absolue, nous pouvons les placer en déterminant leurs valeurs "left" et "top".
+
+Nous allons éviter de coller les éléments contre les bords du cadre, nous décidons donc d'une zone allant de 10% à 90%.
 
 ---
 
 ## Démonstration
 
-Pour voir le code de ce tutoriel exemple en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
+Pour voir le code de ce tutoriel en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
