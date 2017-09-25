@@ -216,7 +216,7 @@ if ( seconde == 0 ) {
 }
 ```
 
-On notera qu'on n'utilise pas un simple "=", car ce signe est utilisé pour **définir** une variable (on définirait la seconde à zéro, au lieu tester sa valeur). L'opérateur de comparaison "est-ce que c'est égal à" s'écrit `==`. Parmi les autres opérateurs, nous avons `>` (plus grand que), `<` (plus petit que), `!=` (pas égal à).
+On notera qu'on n'utilise pas un simple "=", car ce signe est utilisé pour **définir** une variable (on définirait la seconde à zéro, au lieu tester sa valeur). L'opérateur de comparaison "est-ce que c'est égal à" s'écrit `==`. Parmi les autres opérateurs, nous avons `>` (plus grand que), `<` (plus petit que), `!=` (pas égal à)... Lire [la documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Op%C3%A9rateurs/Op%C3%A9rateurs_de_comparaison) pour plus de détails.
 
 Il est possible également de créer une structure "si ceci ... sinon cela ...", ce qui permet de concevoir des comportements alternatifs: 
 
@@ -246,7 +246,7 @@ function metronome() {
   document.getElementById("seconde").innerHTML = seconde;
   // test conditionnel
   if ( seconde == 0 ) {
-	  metronomeMinute();
+    metronomeMinute();
   }
 }
 ```
@@ -267,8 +267,66 @@ Comment produire une position aléatoire? La page HTML étant un espace à deux 
 
 Nous allons éviter de coller les éléments contre les bords du cadre, nous décidons donc d'une zone allant de 10% à 90%.
 
----
+Comment manipuler les valeurs "left" et "top" en JavaScript? C'est facile, JavaScript possède un objet "Style" qui permet de modifier les styles CSS d'un élément de la page.
+
+Si on voulait placer un élément "#seconde" à 50% du haut et de la gauche, voici comment on procéderait en CSS:
+
+```css
+#seconde {
+  top: 50%;
+  left: 50%;
+}
+```
+
+Voici comment faire la même chose en JavaScript:
+
+```javascript
+document.getElementById("seconde").style.top = '50%';
+document.getElementById("seconde").style.left = '50%';
+```
+
+Explicatif:
+* La partie `document.getElementById("seconde")` permet de sélectionner un élément par l'identifiant "seconde".
+* Avec le terme "style", on accède aux styles CSS de cet élément.
+* Le terme "left" indique quelle propriété CSS on va modifier.
+* Le "= '50%'" permet de définir la nouvelle valeur.
+
+On voit que pour chaque propriété modifiée, on devra écrire une ligne entière de code. Si on avait un grand nombre de paramètres à modifier, il serait plus élégant de procéder comme ceci:
+
+```javascript
+var cible = document.getElementById("seconde");
+cible.style.top = '50%';
+cible.style.left = '50%';
+// etc
+```
+
+Mais étant donné que nous ne modifions que deux paramètres, ce n'est pas un problème.
+
+Maintenant que nous savons modifier la position de nos éléments, il ne nous reste qu'une chose à faire: générer des valeurs aléatoires.
+
+Pour cela, le JavaScript comporte une fonction nommée `Math.random()` ([documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random)). Cette fonction produit une valeur aléatoire comprise entre 0 et 1. Cela semble d'une utilité très limitée, mais sachant que la valeur obtenue peut être multipliée par un autre nombre, il est possible d'obtenir au final des nombres aléatoires dans un intervalle qu'on peut spécifier librement.
+
+Le meilleure méthode est de créer une fonction qui nous permet de définir à la volée les chiffres maximum et minimum. Voici une fonction d'usage courant:
+
+```javascript
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+```
+
+Avec cette fonction, si on veut obtenir un chiffre aléatoire situé entre 111 et 777, on écrit: `getRandom(111, 777)`.
+
+Pour attribuer une position aléatoire située entre 10% et 90%, voici comment procéder:
+
+```javascript
+document.getElementById("heure").style.top = getRandom(10, 90)+'%';
+document.getElementById("heure").style.left = getRandom(10, 90)+'%';
+```
+
+Ça y est, nous avons maintenant tous les éléments en place!
 
 ## Démonstration
 
 Pour voir le code de ce tutoriel en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
+
+<iframe width="100%" style="padding-bottom:40%;" src="https://eracom-gr461.github.io/tutoriels-js/tutoriel-1-code/"></iframe>
