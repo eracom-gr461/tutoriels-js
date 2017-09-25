@@ -288,7 +288,7 @@ document.getElementById("seconde").style.left = '50%';
 Explicatif:
 * La partie `document.getElementById("seconde")` permet de sélectionner un élément par l'identifiant "seconde".
 * Avec le terme "style", on accède aux styles CSS de cet élément.
-* Le terme "left" indique quelle propriété CSS on va modifier.
+* Le terme "top" ou "left" indique quelle propriété CSS on va modifier.
 * Le "= '50%'" permet de définir la nouvelle valeur.
 
 On voit que pour chaque propriété modifiée, on devra écrire une ligne entière de code. Si on avait un grand nombre de paramètres à modifier, il serait plus élégant de procéder comme ceci:
@@ -302,9 +302,9 @@ cible.style.left = '50%';
 
 Mais étant donné que nous ne modifions que deux paramètres, ce n'est pas un problème.
 
-Maintenant que nous savons modifier la position de nos éléments, il ne nous reste qu'une chose à faire: générer des valeurs aléatoires.
+Maintenant que nous savons modifier la position de nos éléments, il ne nous reste plus qu'une chose à faire: **générer des valeurs aléatoires!**
 
-Pour cela, le JavaScript comporte une fonction nommée `Math.random()` ([documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random)). Cette fonction produit une valeur aléatoire comprise entre 0 et 1. Cela semble d'une utilité très limitée, mais sachant que la valeur obtenue peut être multipliée par un autre nombre, il est possible d'obtenir au final des nombres aléatoires dans un intervalle qu'on peut spécifier librement.
+Pour cela, le JavaScript comporte une fonction nommée `Math.random()` ([documentation](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Math/random)). Cette fonction produit **une valeur aléatoire comprise entre 0 et 1**. Cela semble d'une utilité très limitée, mais sachant que la valeur obtenue peut être multipliée par un autre nombre, il est possible d'obtenir au final des nombres aléatoires dans un intervalle qu'on peut spécifier librement.
 
 Le meilleure méthode est de créer une fonction qui nous permet de définir à la volée les chiffres maximum et minimum. Voici une fonction d'usage courant:
 
@@ -329,4 +329,6 @@ document.getElementById("heure").style.left = getRandom(10, 90)+'%';
 
 Pour voir le code de ce tutoriel en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
 
-<iframe width="100%" style="padding-bottom:40%;" src="https://eracom-gr461.github.io/tutoriels-js/tutoriel-1-code/"></iframe>
+<div class="iframe-container" style="padding-bottom:56.25%;background:white;">
+<iframe style="width: 100%;height: 100%;" src="https://eracom-gr461.github.io/tutoriels-js/tutoriel-1-code/"></iframe>
+</div>
