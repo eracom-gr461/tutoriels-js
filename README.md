@@ -1,12 +1,12 @@
 # Tutoriels JavaScript
 
-Ces deux tutoriels JavaScript ont été conçus durant le cadre du projet "The JS Clocks", dans le cadre du cours Multimédia / Web, donné à l'Eracom en automne 2017.
+Ces deux tutoriels JavaScript ont été conçus durant le projet **"The JS Clocks"**, dans le cadre du cours Multimédia / Web, donné à l'Eracom en automne 2017.
 
 L'objectif est de concevoir des interfaces numériques permettant de visualiser l'écoulement du temps.
 
 Les tutoriels couvrent les points suivants: 
 
-## Tutoriel 1:
+## [Tutoriel 1](tutoriel-1.md):
 - Génération d'aléatoire
 
 Choses à connaître:

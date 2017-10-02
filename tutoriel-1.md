@@ -328,7 +328,3 @@ document.getElementById("heure").style.left = getRandom(10, 90)+'%';
 ## Démonstration
 
 Pour voir le code de ce tutoriel en action, [visitez cette page](tutoriel-1-code) et affichez [le code source](https://github.com/eracom-gr461/tutoriels-js/blob/master/tutoriel-1-code/index.html).
-
-<div class="iframe-container" style="padding-bottom:56.25%;background:white;">
-<iframe style="width: 100%;height: 100%;" src="https://eracom-gr461.github.io/tutoriels-js/tutoriel-1-code/"></iframe>
-</div>
